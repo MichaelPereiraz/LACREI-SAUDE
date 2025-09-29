@@ -1,0 +1,175 @@
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Heart, Shield, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import lacreiLogo from '@/assets/lacrei-logo.png';
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
+
+  const navigation = [
+    { name: 'Início', href: '/', icon: Heart },
+    { name: 'Sobre Nós', href: '/sobre', icon: Users },
+    { name: 'Serviços', href: '/servicos', icon: Shield },
+  ];
+
+  return (
+    <header 
+      className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border shadow-soft"
+      role="banner"
+    >
+      {/* Skip Navigation Link for Screen Readers */}
+      <a 
+        href="#main-content" 
+        className="skip-link"
+        aria-label="Pular para o conteúdo principal"
+      >
+        Pular para o conteúdo principal
+      </a>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 lg:h-20">
+          {/* Logo */}
+          <Link 
+            to="/" 
+            className="flex items-center space-x-3 group focus:outline-none focus:ring-2 focus:ring-primary rounded-lg p-1"
+            aria-label="Lacrei Saúde - Página inicial"
+          >
+            <img 
+              src={lacreiLogo} 
+              alt="Lacrei Saúde"
+              className="h-10 w-10 lg:h-12 lg:w-12 transition-transform group-hover:scale-105"
+              loading="eager"
+            />
+            <div className="flex flex-col">
+              <span className="text-xl lg:text-2xl font-heading font-bold text-foreground group-hover:text-primary transition-colors">
+                Lacrei Saúde
+              </span>
+              <span className="text-xs text-muted-foreground hidden sm:block">
+                Cuidar com respeito
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2" role="navigation" aria-label="Navegação principal">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={cn(
+                    "flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-accent/10",
+                    isActive(item.href) 
+                      ? "text-primary bg-primary/5 border border-primary/20" 
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  <span>{item.name}</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* CTA Button - Desktop */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="hidden lg:inline-flex"
+              aria-label="Entrar na plataforma"
+            >
+              Entrar
+            </Button>
+            <Button 
+              variant="hero" 
+              size="default"
+              aria-label="Cadastrar-se na Lacrei Saúde"
+            >
+              Cadastre-se
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6" aria-hidden="true" />
+            ) : (
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            )}
+          </Button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <nav 
+            id="mobile-menu"
+            className="md:hidden pb-4 animate-fade-in"
+            role="navigation" 
+            aria-label="Navegação móvel"
+          >
+            <div className="flex flex-col space-y-2 pt-4 border-t border-border">
+              {navigation.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={cn(
+                      "flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-medium transition-all duration-200",
+                      isActive(item.href) 
+                        ? "text-primary bg-primary/5 border border-primary/20" 
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/10"
+                    )}
+                    onClick={() => setIsMenuOpen(false)}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                  >
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+              
+              {/* Mobile CTA Buttons */}
+              <div className="flex flex-col space-y-2 pt-4 border-t border-border">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-center"
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-label="Entrar na plataforma"
+                >
+                  Entrar
+                </Button>
+                <Button 
+                  variant="hero" 
+                  className="w-full justify-center"
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-label="Cadastrar-se na Lacrei Saúde"
+                >
+                  Cadastre-se
+                </Button>
+              </div>
+            </div>
+          </nav>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Header;

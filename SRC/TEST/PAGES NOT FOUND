@@ -1,0 +1,79 @@
+import React from 'react';
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Home, ArrowLeft, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+const NotFound = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+  }, [location.pathname]);
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header />
+      
+      <main className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8" role="main">
+        <div className="max-w-lg mx-auto text-center">
+          <div className="mb-8">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-full mb-6">
+              <Heart className="h-10 w-10 text-primary" aria-hidden="true" />
+            </div>
+            <h1 className="text-6xl font-heading font-bold text-foreground mb-4">404</h1>
+            <h2 className="text-2xl lg:text-3xl font-heading font-semibold text-foreground mb-4">
+              Página não encontrada
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              Ops! A página que você está procurando não existe ou foi movida. 
+              Que tal voltar ao início e explorar nossos serviços?
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              variant="hero" 
+              size="lg"
+              asChild
+              aria-label="Voltar para a página inicial"
+            >
+              <Link to="/">
+                <Home className="mr-2 h-5 w-5" aria-hidden="true" />
+                Ir para o Início
+              </Link>
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => window.history.back()}
+              aria-label="Voltar à página anterior"
+            >
+              <ArrowLeft className="mr-2 h-5 w-5" aria-hidden="true" />
+              Página Anterior
+            </Button>
+          </div>
+
+          <div className="mt-12 pt-8 border-t border-border">
+            <p className="text-sm text-muted-foreground">
+              Precisa de ajuda? Entre em contato conosco em{" "}
+              <a 
+                href="mailto:contato@lacreisaude.com.br" 
+                className="text-primary hover:underline focus:outline-none focus:underline"
+              >
+                contato@lacreisaude.com.br
+              </a>
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default NotFound;

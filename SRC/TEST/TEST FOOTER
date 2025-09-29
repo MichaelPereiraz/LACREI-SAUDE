@@ -1,0 +1,99 @@
+import { render } from '@testing-library/react';
+import { screen } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
+import { describe, it, expect, vi } from 'vitest';
+import '@testing-library/jest-dom';
+import Footer from '../components/Footer';
+
+// Mock for the assets
+vi.mock('../assets/lacrei-logo.png', () => ({
+  default: '/mocked-logo.png'
+}));
+
+const FooterWithRouter = () => (
+  <BrowserRouter>
+    <Footer />
+  </BrowserRouter>
+);
+
+describe('Footer Component', () => {
+  it('renders the Lacrei Saúde brand information', () => {
+    render(<FooterWithRouter />);
+    
+    const logo = screen.getByAltText('Lacrei Saúde');
+    const brandName = screen.getByText('Lacrei Saúde');
+    const tagline = screen.getByText('Cuidar com respeito e inclusão');
+    
+    expect(logo).toBeInTheDocument();
+    expect(brandName).toBeInTheDocument();
+    expect(tagline).toBeInTheDocument();
+  });
+
+  it('displays contact information', () => {
+    render(<FooterWithRouter />);
+    
+    expect(screen.getByText('contato@lacreisaude.com.br')).toBeInTheDocument();
+    expect(screen.getByText('(11) 99999-9999')).toBeInTheDocument();
+    expect(screen.getByText('São Paulo, SP - Brasil')).toBeInTheDocument();
+  });
+
+  it('renders quick links navigation', () => {
+    render(<FooterWithRouter />);
+    
+    const quickLinksHeading = screen.getByText('Links Rápidos');
+    expect(quickLinksHeading).toBeInTheDocument();
+    
+    expect(screen.getAllByText('Início')[1]).toBeInTheDocument(); // Second instance in footer
+    expect(screen.getAllByText('Sobre Nós')[1]).toBeInTheDocument();
+    expect(screen.getByText('Contato')).toBeInTheDocument();
+  });
+
+  it('renders legal links', () => {
+    render(<FooterWithRouter />);
+    
+    expect(screen.getByText('Política de Privacidade')).toBeInTheDocument();
+    expect(screen.getByText('Termos de Uso')).toBeInTheDocument();
+    expect(screen.getByText('Código de Ética')).toBeInTheDocument();
+    expect(screen.getByText('Acessibilidade')).toBeInTheDocument();
+  });
+
+  it('displays social media links with proper accessibility', () => {
+    render(<FooterWithRouter />);
+    
+    expect(screen.getByLabelText('Siga-nos no Facebook')).toBeInTheDocument();
+    expect(screen.getByLabelText('Siga-nos no Instagram')).toBeInTheDocument();
+    expect(screen.getByLabelText('Siga-nos no Twitter')).toBeInTheDocument();
+    expect(screen.getByLabelText('Conecte-se no LinkedIn')).toBeInTheDocument();
+  });
+
+  it('includes newsletter subscription form', () => {
+    render(<FooterWithRouter />);
+    
+    const newsletterHeading = screen.getByText('Fique por dentro das novidades');
+    const emailInput = screen.getByLabelText('Digite seu email para receber newsletter');
+    const subscribeButton = screen.getByLabelText('Inscrever-se na newsletter');
+    
+    expect(newsletterHeading).toBeInTheDocument();
+    expect(emailInput).toBeInTheDocument();
+    expect(emailInput).toHaveAttribute('type', 'email');
+    expect(subscribeButton).toBeInTheDocument();
+  });
+
+  it('displays current year in copyright', () => {
+    render(<FooterWithRouter />);
+    
+    const currentYear = new Date().getFullYear();
+    expect(screen.getByText(`© ${currentYear} Lacrei Saúde. Todos os direitos reservados.`)).toBeInTheDocument();
+  });
+
+  it('has proper semantic structure', () => {
+    render(<FooterWithRouter />);
+    
+    const footer = screen.getByRole('contentinfo');
+    const navigations = screen.getAllByRole('navigation');
+    
+    expect(footer).toBeInTheDocument();
+    expect(navigations.length).toBeGreaterThanOrEqual(2); // Quick links and legal links
+  });
+})

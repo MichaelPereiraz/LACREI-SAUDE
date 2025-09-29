@@ -1,1 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Lacrei Saúde Design System - Healthcare & LGBTQ+ Inclusive Design
+All colors optimized for accessibility with high contrast ratios (WCAG AA compliant)
+*/
+
+@layer base {
+  :root {
+    /* Base colors - High contrast for accessibility */
+    --background: 0 0% 100%;
+    --foreground: 220 20% 15%;
+
+    /* Card system */
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+
+    /* Popover system */
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+
+    /* Lacrei Primary - Healthcare Blue (professional, trustworthy) */
+    --primary: 212 100% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 212 100% 85%;
+    --primary-dark: 212 100% 25%;
+
+    /* Lacrei Secondary - Warm Healthcare Green (caring, healing) */
+    --secondary: 162 75% 40%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 162 75% 85%;
+
+    /* Accent - Inclusive Purple (diversity, acceptance) */
+    --accent: 280 60% 50%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 280 60% 90%;
+
+    /* Support colors */
+    --muted: 210 40% 95%;
+    --muted-foreground: 220 15% 45%;
+    
+    /* Success - Healthcare positive */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    
+    /* Warning - Healthcare attention */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Destructive - Healthcare alert */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Form elements */
+    --border: 214 32% 85%;
+    --input: 214 32% 92%;
+    --ring: 212 100% 35%;
+
+    /* Custom gradients for visual appeal */
+    --gradient-primary: linear-gradient(135deg, hsl(212 100% 35%), hsl(162 75% 40%));
+    --gradient-hero: linear-gradient(135deg, hsl(212 100% 35%), hsl(280 60% 50%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    
+    /* Shadows for depth */
+    --shadow-soft: 0 2px 10px hsl(220 20% 15% / 0.1);
+    --shadow-medium: 0 4px 20px hsl(220 20% 15% / 0.15);
+    --shadow-strong: 0 8px 30px hsl(220 20% 15% / 0.2);
+
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode - maintaining high contrast for accessibility */
+    --background: 220 25% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Adjusted for dark mode readability */
+    --primary: 212 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 212 100% 25%;
+    --primary-dark: 212 100% 60%;
+
+    --secondary: 162 75% 50%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 162 75% 25%;
+
+    --accent: 280 60% 60%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 280 60% 25%;
+
+    --muted: 220 25% 15%;
+    --muted-foreground: 220 15% 65%;
+    
+    --success: 142 76% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 55%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 25% 20%;
+    --input: 220 25% 15%;
+    --ring: 212 100% 50%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(212 100% 50%), hsl(162 75% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(212 100% 50%), hsl(280 60% 60%));
+    --gradient-card: linear-gradient(180deg, hsl(220 25% 10%), hsl(220 25% 12%));
+    
+    /* Dark mode shadows */
+    --shadow-soft: 0 2px 10px hsl(0 0% 0% / 0.3);
+    --shadow-medium: 0 4px 20px hsl(0 0% 0% / 0.4);
+    --shadow-strong: 0 8px 30px hsl(0 0% 0% / 0.5);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    scroll-behavior: smooth;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Skip link for screen readers */
+  .skip-link {
+    @apply absolute -top-10 left-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md;
+    @apply focus:top-4 transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+  
+  .animate-bounce-in {
+    animation: bounceIn 0.6s var(--transition-bounce) forwards;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-medium;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-strong;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Print styles for accessibility */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

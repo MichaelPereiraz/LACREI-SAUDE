@@ -1,0 +1,249 @@
+import React from 'react';
+import { Users, Heart, Shield, Award, Target, Lightbulb } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+
+const About = () => {
+  const values = [
+    {
+      icon: Heart,
+      title: 'Respeito e Inclusão',
+      description: 'Cada pessoa é única e merece ser tratada com dignidade, independente de sua orientação sexual ou identidade de gênero.',
+    },
+    {
+      icon: Shield,
+      title: 'Segurança e Confiança',
+      description: 'Criamos um ambiente seguro onde você pode se expressar livremente e receber cuidados sem julgamentos.',
+    },
+    {
+      icon: Users,
+      title: 'Comunidade Unida',
+      description: 'Acreditamos na força da comunidade e na importância de construir redes de apoio e cuidado mútuo.',
+    },
+  ];
+
+  const mission = [
+    {
+      icon: Target,
+      title: 'Nossa Missão',
+      description: 'Garantir acesso à saúde de qualidade para a comunidade LGBTQIAPN+, conectando pessoas a profissionais capacitados e inclusivos.',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Nossa Visão',
+      description: 'Um futuro onde todas as pessoas tenham acesso igualitário a cuidados de saúde respeitosos e afirmativos.',
+    },
+    {
+      icon: Award,
+      title: 'Nossos Valores',
+      description: 'Pautamos nossas ações em respeito, inclusão, transparência, qualidade e compromisso com a diversidade.',
+    },
+  ];
+
+  const stats = [
+    { number: '10k+', label: 'Usuários atendidos', ariaLabel: 'Mais de 10 mil usuários atendidos' },
+    { number: '500+', label: 'Profissionais cadastrados', ariaLabel: 'Mais de 500 profissionais cadastrados' },
+    { number: '50+', label: 'Cidades cobertas', ariaLabel: 'Presença em mais de 50 cidades' },
+    { number: '98%', label: 'Satisfação do usuário', ariaLabel: '98% de satisfação dos usuários' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      <main id="main-content" role="main">
+        {/* Hero Section */}
+        <section 
+          className="relative py-16 lg:py-24 bg-gradient-hero text-white overflow-hidden"
+          role="banner"
+        >
+          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="max-w-4xl mx-auto text-center animate-fade-in">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6">
+                Sobre a <span className="text-accent-light">Lacrei Saúde</span>
+              </h1>
+              <p className="text-xl md:text-2xl font-light mb-8 text-gray-100 leading-relaxed">
+                Somos mais que uma plataforma de saúde. Somos um movimento de 
+                transformação, inclusão e cuidado respeitoso para toda a comunidade LGBTQIAPN+.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Statistics Section */}
+        <section className="py-16 bg-primary/5" aria-labelledby="stats-heading">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 id="stats-heading" className="sr-only">Estatísticas da Lacrei Saúde</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
+                <div 
+                  key={index} 
+                  className="text-center animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="text-3xl lg:text-4xl font-heading font-bold text-primary mb-2" aria-label={stat.ariaLabel}>
+                    {stat.number}
+                  </div>
+                  <div className="text-sm lg:text-base text-muted-foreground font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Mission, Vision, Values */}
+        <section className="py-16 lg:py-20" aria-labelledby="mission-heading">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 id="mission-heading" className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-6">
+                Nossa Identidade
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Conheça os pilares que fundamentam nosso trabalho e nosso compromisso 
+                com a saúde inclusiva e respeitosa.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+              {mission.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <Card 
+                    key={index}
+                    className="p-8 text-center hover-lift animate-slide-up bg-gradient-card border-0 shadow-soft"
+                    style={{ animationDelay: `${index * 0.2}s` }}
+                  >
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6">
+                      <Icon className="h-8 w-8 text-primary" aria-hidden="true" />
+                    </div>
+                    <h3 className="text-xl font-heading font-semibold text-foreground mb-4">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Values Section */}
+        <section className="py-16 lg:py-20 bg-secondary/5" aria-labelledby="values-heading">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 id="values-heading" className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-6">
+                Nossos Valores
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Os princípios que guiam cada decisão e ação em nossa jornada 
+                de construir uma saúde mais inclusiva.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+              {values.map((value, index) => {
+                const Icon = value.icon;
+                return (
+                  <Card 
+                    key={index}
+                    className="p-8 text-center hover-lift animate-slide-up bg-white border-0 shadow-soft"
+                    style={{ animationDelay: `${index * 0.2}s` }}
+                  >
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-secondary/10 rounded-full mb-6">
+                      <Icon className="h-8 w-8 text-secondary" aria-hidden="true" />
+                    </div>
+                    <h3 className="text-xl font-heading font-semibold text-foreground mb-4">
+                      {value.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {value.description}
+                    </p>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Story Section */}
+        <section className="py-16 lg:py-20" aria-labelledby="story-heading">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 id="story-heading" className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-6">
+                  Nossa História
+                </h2>
+              </div>
+
+              <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
+                <p className="text-xl mb-8">
+                  A Lacrei Saúde nasceu da necessidade real de criar um espaço seguro e 
+                  inclusivo para que pessoas LGBTQIAPN+ pudessem acessar cuidados de saúde 
+                  sem medo, discriminação ou julgamentos.
+                </p>
+                
+                <p className="mb-8">
+                  Sabemos que encontrar profissionais de saúde preparados e sensíveis às 
+                  necessidades específicas da nossa comunidade pode ser um desafio. Por isso, 
+                  criamos uma plataforma que conecta pessoas a profissionais capacitados, 
+                  garantindo que cada consulta seja um ambiente de respeito e acolhimento.
+                </p>
+
+                <p className="mb-8">
+                  Nossa equipe é formada por pessoas diversas que entendem na prática os 
+                  desafios enfrentados pela comunidade LGBTQIAPN+. Trabalhamos todos os dias 
+                  para que ninguém mais precise escolher entre ser quem é e receber cuidados 
+                  de qualidade.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="py-16 lg:py-20 bg-gradient-primary text-white" aria-labelledby="cta-heading">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 id="cta-heading" className="text-3xl lg:text-4xl font-heading font-bold mb-6">
+                Junte-se à Nossa Comunidade
+              </h2>
+              <p className="text-xl mb-8 text-gray-100 leading-relaxed">
+                Seja parte desta transformação. Cadastre-se e tenha acesso a profissionais 
+                que respeitam sua identidade e cuidam da sua saúde com excelência.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  variant="medical" 
+                  size="lg"
+                  className="font-semibold"
+                  aria-label="Cadastrar-se como usuário"
+                >
+                  Quero me Cadastrar
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-primary font-semibold"
+                  aria-label="Cadastrar-se como profissional"
+                >
+                  Sou Profissional
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default About;
